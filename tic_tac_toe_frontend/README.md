@@ -1,82 +1,51 @@
-# Lightweight React Template for KAVIA
+# Tic Tac Toe Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Modern, accessible Tic Tac Toe game UI with two-player local play, built with React and a lightweight Ocean Professional theme.
 
 ## Features
+- 3x3 board with accessible controls (role="grid"/"gridcell", keyboard arrows, focus states)
+- Current player indicator, winner/draw status
+- Highlight winning line, disable board on finish
+- Restart button
+- Functional components with hooks, immutable updates
+- Responsive layout, subtle shadows, rounded corners, smooth transitions
+- Minimal unit tests for game logic
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Run locally
+- Install dependencies: `npm install`
+- Start dev server: `npm start`
+- Run tests: `npm test`
+- Build for production: `npm run build`
 
-## Getting Started
+The app is served at http://localhost:3000.
 
-In the project directory, you can run:
+## Theme
+Ocean Professional palette:
+- Primary: #2563EB
+- Secondary/Success: #F59E0B
+- Error: #EF4444
+- Background: #f9fafb
+- Surface: #ffffff
+- Text: #111827
 
-### `npm start`
+Theme variables are defined in `src/App.css`. A light/dark toggle is available in the header and stored in localStorage.
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Accessibility
+- Buttons use meaningful aria-labels (e.g., "Cell 1 empty", "Cell 2 contains X")
+- Grid semantics (role="grid" and role="gridcell")
+- Focus-visible outlines
+- Keyboard navigation with arrow keys, Enter/Space to activate
+- Live status region with aria-live="polite"
 
-### `npm test`
+## Project Structure
+- `src/components/Game.js` - stateful game controller
+- `src/components/Board.js` - 3x3 grid
+- `src/components/Square.js` - memoized button cell
+- `src/utils/gameUtils.js` - pure functions for winner/draw logic
+- `src/App.js` / `src/App.css` - app shell and theme
 
-Launches the test runner in interactive watch mode.
+## Security & Notes
+- No external services or unsafe patterns used
+- No new environment variables required
+- All inputs are internal UI interactions only
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

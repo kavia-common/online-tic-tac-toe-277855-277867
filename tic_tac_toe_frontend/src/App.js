@@ -1,46 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
+import Game from './components/Game';
 
+/**
+ * App - Layout shell and theme provider applying the Ocean Professional theme.
+ * Provides light/dark toggle for user preference and renders the Tic Tac Toe game.
+ */
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => {
+    try {
+      const stored = window.localStorage.getItem('theme');
+      return stored || 'light';
+    } catch {
+      return 'light';
+    }
+  });
 
-  // Effect to apply theme to document element
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    try {
+      window.localStorage.setItem('theme', theme);
+    } catch {
+      // ignore storage errors
+    }
   }, [theme]);
 
   // PUBLIC_INTERFACE
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
+
+  const themeLabel = useMemo(
+    () => `Switch to ${theme === 'light' ? 'dark' : 'light'} mode`,
+    [theme]
+  );
 
   return (
     <div className="App">
       <header className="App-header">
-        <button 
-          className="theme-toggle" 
+        <button
+          className="theme-toggle"
           onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          aria-label={themeLabel}
+          title={themeLabel}
+          type="button"
         >
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <main className="container">
+          <h1 className="title">Tic Tac Toe</h1>
+          <p className="subtitle">Two-player local play</p>
+          <Game />
+          <footer className="footer-note" aria-live="polite">
+            Built with a modern Ocean Professional theme.
+          </footer>
+        </main>
       </header>
     </div>
   );
